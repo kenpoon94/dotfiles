@@ -1,2 +1,4 @@
 # dotfiles
-.vimrc .tmux.conf
+.vimrc .tmux.conf coc-settings.json
+
+Current vim configuration for React and PHP development
