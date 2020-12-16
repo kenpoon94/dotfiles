@@ -1,6 +1,7 @@
 source ~/.vimplugrc/fzf.vim
 source ~/.vimplugrc/coc.vim
 
+execute pathogen#infect()
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -19,9 +20,13 @@ Plug 'neoclide/coc.nvim'
 Plug 'easymotion/vim-easymotion'
 Plug 'StanAngeloff/php.vim'
 Plug 'marlonfan/coc-phpls'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-eunuch'
 call plug#end()
 
 syntax on
+filetype plugin indent on
 
 " Primeagen - First VimRC
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
@@ -57,9 +62,28 @@ let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+" vim-indent-guides customize
+colorscheme gruvbox
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 2
+let g:indent_guides_enable_on_vim_startup = 1
+
+" vimify spotify key
+let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM6ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
+
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
+
+" ----------------------
+" Custom Command
+" ----------------------
+"
+" Setup Prettier [Mandatory]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Save without formatting prettier
+" command! -nargs=0 Nw  :noa w
 
 " ----------------------
 " Color Scheme 
@@ -138,5 +162,17 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
     " Merge to (left)
     nmap <leader>gf :diffget //2<CR> 
 
+" ----------------------
+" Vimify Spotify  
+" ----------------------
+"
+    nnoremap <Leader>ss :SpToggle<CR>
+    nnoremap <Leader>sq :SpSearch<Space>
+    nnoremap <Leader>sn :SpNext<CR>
+    nnoremap <Leader>sp :SpPrevious<CR>
 
-
+" ----------------------
+" Nerd Tree 
+" ----------------------
+"
+    nnoremap <Leader>p :NERDTreeToggle<CR>
