@@ -176,3 +176,12 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " ----------------------
 "
     nnoremap <Leader>p :NERDTreeToggle<CR>
+" ----------------------
+" Console Log Vim
+" ----------------------
+" Console log from insert mode; Puts focus inside parentheses
+    imap cll console.log();<Esc>==f(a
+" Console log from visual mode on next line, puts visual selection inside parentheses
+    vmap cll yocll<Esc>pysiw"f"a,<ESC>p
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+    nmap cll yiwocll<Esc>pysiw"f"a,<ESC>p
