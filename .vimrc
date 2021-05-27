@@ -16,13 +16,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty' 
 Plug 'mbbill/undotree'
 Plug 'ap/vim-buftabline'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'easymotion/vim-easymotion'
 Plug 'StanAngeloff/php.vim'
 Plug 'marlonfan/coc-phpls'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-eunuch'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 syntax on
@@ -54,8 +55,7 @@ set background=dark
 
 let mapleader = " "
 let loaded_matchparen = 1
-let g:rooter_use_lcd = 1
-let g:rooter_manual_only = 1
+let g:rooter_cd_cmd = 1
 let g:sneak#label = 1
 let g:netrw_browse_split = 2
 let g:vrfr_rg = 'true'
@@ -70,7 +70,8 @@ let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 
 " vimify spotify key
-let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM6ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
+" let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM6ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
+let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM=:ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -83,7 +84,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Save without formatting prettier
-" command! -nargs=0 Nw  :noa w
+command! -nargs=0 Nw  :noa w
 
 " ----------------------
 " Color Scheme 
@@ -102,6 +103,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " VIM Navigation 
 " ----------------------
 "
+    nnoremap gh :call CocActionAsync('doHover')<CR>
     " Open .init.vim or .vimrc 
     nnoremap <leader>\ :e ~/.config/nvim/init.vim<CR>
 
@@ -134,7 +136,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
     nmap <leader>/ <Plug>(easymotion-overwin-f2)
 
     " Two char search
-    nmap / :BLines<CR> 
+    nmap // :BLines<CR> 
 
 " ----------------------
 " Document Manipulation
@@ -176,12 +178,36 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " ----------------------
 "
     nnoremap <Leader>p :NERDTreeToggle<CR>
+
 " ----------------------
-" Console Log Vim
+" Console Log 
 " ----------------------
 " Console log from insert mode; Puts focus inside parentheses
-    imap cll console.log();<Esc>==f(a
+    imap \cll console.log();<Esc>hh
 " Console log from visual mode on next line, puts visual selection inside parentheses
-    vmap cll yocll<Esc>pysiw"f"a,<ESC>p
+    vmap \cll yocll<Esc>pysib"f"i: <ESC>la, <ESC>p
 " Console log from normal mode, inserted on next line with word your on inside parentheses
-    nmap cll yiwocll<Esc>pysiw"f"a,<ESC>p
+    nmap \cll yiwocll<Esc>pysib"f"i: <ESC>la, <ESC>p
+
+" ----------------------
+" Colon Manipulation Obj:key 
+" ----------------------
+" Change CoLon to Comma
+map <silent> <Plug>ChangeColonToComma V<Plug>VChangeColonToComma
+  \:call repeat#set("\<Plug>ChangeColonToComma", v:count)<cr>
+map <silent> \clc <Plug>ChangeColonToComma
+
+" Change CoLon to Comma (visual)
+vmap <silent> <Plug>VChangeColonToComma <esc>:set nohlsearch<cr>gv:s/:.*/,/<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VChangeColonToComma", v:count)<cr>
+vmap <silent> \clc <Plug>VChangeColonToComma
+
+" Delete after CoLon
+map <silent> <Plug>ColonDelete V<Plug>VColonDelete
+  \:call repeat#set("\<Plug>ColonDelete", v:count)<cr>
+map <silent> \cld <Plug>ColonDelete
+
+" Delete after CoLon (visual)
+vmap <silent> <Plug>VColonDelete <esc>:set nohlsearch<cr>gv:s/:.*//<cr>:let @/=''<cr>:set hlsearch<cr>
+  \:call repeat#set("\<Plug>VColonDelete", v:count)<cr>
+vmap <silent> \cld <Plug>VColonDelete
