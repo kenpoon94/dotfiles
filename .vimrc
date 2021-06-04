@@ -69,9 +69,6 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 2
 let g:indent_guides_enable_on_vim_startup = 1
 
-" vimify spotify key
-" let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM6ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
-let g:spotify_token='YWEyYzIzNjExOTIyNDhiYmFkNTBjNmVhMTQ2MjQzNjM=:ZmJkZmFiMDUzOWRkNDk2Yzk2YWViYjliMmRlZTM4ZGM='
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
