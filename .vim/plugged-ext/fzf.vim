@@ -12,7 +12,8 @@ let g:fzf_action = {
 
           map <C-f> :Files<CR>
           map <C-g> :Rg<CR>
-          map <leader>b :Buffers<CR>
+          " Two char search
+          nmap // :BLines<CR>
           nnoremap <leader>t :Tags<CR>
           nnoremap <leader>m :Marks<CR>
 
@@ -23,7 +24,7 @@ let g:fzf_action = {
 
           let $FZF_DEFAULT_OPTS ="--layout=reverse --inline-info"
           " let $FZF_DEFAULT_COMMAND="rg --files --hidden"
-          let $FZF_DEFAULT_COMMAND="fd --type f"
+          let $FZF_DEFAULT_COMMAND="fdfind --type f --hidden"
 
 
           " Customize fzf colors to match your color scheme
@@ -69,3 +70,4 @@ let g:fzf_action = {
                                                     \ call fzf#vim#grep(
                                                       \   'git grep --line-number '.shellescape(<q-args>), 0,
                                                         \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
