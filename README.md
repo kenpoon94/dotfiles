@@ -9,7 +9,4 @@
 - nvim
 - spotifyd
 - spotify-tui
-
-**Note:**
-- `./vim/plugged/` fresh plugins install by vim-plug
-- `./vim/plugged-ext/` are extended 
+- blueman (blue-manager)
